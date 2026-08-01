@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ChristianLuciani/noesis/schema/thinker.toml.schema.json",
+  "title": "Thinker Manifest",
+  "description": "Canonical schema for thinker.toml v1.0 — a cognitive agent blueprint in the Noesis taxonomy",
+  "type": "object",
+  "required": ["manifest", "identity", "cognitive_profile", "skills", "memory", "context", "runtime"],
+  "properties": {
+    "manifest": {
+      "type": "object",
+      "description": "Version and metadata for the thinker manifest itself",
+      "required": ["version"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "1.0",
+          "description": "Semantic version of the thinker.toml spec this file complies with"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date",
+          "description": "ISO 8601 date of last substantive edit"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "contact": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "identity": {
+      "type": "object",
+      "description": "Capa 0: Identidad — quién es este pensador, su tradición, y qué sabe de sí mismo",
+      "required": ["slug", "display_name", "tradition", "self_acknowledged_biases"],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "URL-safe identifier, matches directory name"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Human-readable name, e.g. 'Systemic Thinker'"
+        },
+        "tagline": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "One-line essence of this thinking mode"
+        },
+        "tradition": {
+          "type": "string",
+          "description": "Academic or philosophical tradition this thinker belongs to"
+        },
+        "self_acknowledged_biases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "description": "Biases and blind spots this mode of thinking is known to have. NOT 'none' — every lens distorts."
+        }
+      }
+    },
+
+    "cognitive_profile": {
+      "type": "object",
+      "description": "Capa 1: Perfil cognitivo — cómo piensa este modo de pensamiento",
+      "required": ["characteristic_questions", "heuristics", "epistemic_vices"],
+      "properties": {
+        "characteristic_questions": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"type": "string"},
+          "description": "Preguntas que este pensador típicamente hace al enfrentar un problema"
+        },
+        "heuristics": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Principios o reglas generales que guían el razonamiento"
+        },
+        "epistemic_vices": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "description": "Tendencias negativas de este modo de pensar (ej. sobre-análisis, parálisis por opciones)"
+        },
+        "stops_when": {
+          "type": "string",
+          "description": "Condición de satisfacción: cuándo considera este pensador que ha terminado de pensar"
+        },
+        "ignores": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Lo que este pensador deliberadamente no considera relevante"
+        },
+        "metacognitive_awareness": {
+          "type": "object",
+          "properties": {
+            "confidence_calibration": {
+              "type": "string",
+              "description": "Cómo calibra su confianza este pensador"
+            },
+            "knows_when_to_delegate": {
+              "type": "boolean",
+              "description": "¿Reconoce cuándo un problema excede su competencia?"
+            }
+          }
+        }
+      }
+    },
+
+    "skills": {
+      "type": "object",
+      "description": "Capa 2: Taxonomía de skills — qué capacidades requiere este modo de pensamiento",
+      "required": ["declared"],
+      "properties": {
+        "declared": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Lista de capacidades que este modo de pensamiento necesita (puede ser vacía)"
+        },
+        "tools_preference": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {"type": "string"},
+              "examples": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+
+    "memory": {
+      "type": "object",
+      "description": "Capa 3: Modelo de memoria — qué recuerda, por cuánto, con qué estructura",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ephemeral", "accumulating", "reindexing", "none"],
+          "description": "Estrategia de memoria: efímera, acumulativa, reindexadora, o sin memoria"
+        },
+        "retention": {
+          "type": "string",
+          "description": "Duración de la memoria, ej. 'session', 'conversation', 'indefinite'"
+        },
+        "structure": {
+          "type": "string",
+          "description": "Estructura de almacenamiento: flat, hierarchical, associative, etc."
+        }
+      }
+    },
+
+    "context": {
+      "type": "object",
+      "description": "Capa 4: Ingeniería de contexto — cómo construye, prioriza y poda su ventana",
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": ["recency", "relevance", "summary", "sliding_window", "full_context", "delegated"],
+          "description": "Estrategia de construcción de contexto"
+        },
+        "max_tokens_preference": {
+          "type": "integer",
+          "description": "Tamaño de ventana preferido (0 = no preference)"
+        },
+        "pruning": {
+          "type": "string",
+          "description": "Qué información eliminar cuando la ventana se llena"
+        }
+      }
+    },
+
+    "runtime": {
+      "type": "object",
+      "description": "Capa 5: Runtime / execution — cómo se ejecuta este pensador",
+      "properties": {
+        "preferred_execution": {
+          "type": "string",
+          "enum": ["single_pass", "chain_of_thought", "tree_search", "tool_loop", "reactive", "unspecified"],
+          "description": "Modo de ejecución preferido"
+        },
+        "loops_when": {
+          "type": "string",
+          "description": "Cuándo debe iterar (ej. 'hasta que la confianza supere 0.8')"
+        },
+        "delegation_policy": {
+          "type": "string",
+          "description": "Cuándo delegar a otro pensador"
+        }
+      }
+    },
+
+    "taxonomy": {
+      "type": "object",
+      "description": "Posición en la taxonomía Noesis",
+      "properties": {
+        "family": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "description": "Familia(s) taxonómica(s) a las que pertenece"
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "thinker": {"type": "string"},
+              "relationship": {
+                "type": "string",
+                "enum": ["complements", "contrasts_with", "derives_from", "parent_of"]
+              },
+              "note": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "sources": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["author", "year", "title"],
+        "properties": {
+          "author": {"type": "string"},
+          "year": {"type": "integer"},
+          "title": {"type": "string"},
+          "doi": {"type": "string", "pattern": "^https://doi\\.org/10\\..+"},
+          "relevance": {"type": "string"}
+        }
+      },
+      "description": "Referencias académicas que fundamentan este modo de pensamiento"
+    },
+
+    "extensions": {
+      "type": "object",
+      "description": "Campos de extensión para futuras capacidades. Usar x- prefix para propiedades experimentales."
+    }
+  }
+}
