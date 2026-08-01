@@ -1,0 +1,15 @@
+# Zola build output
+site/public/
+
+# Environment
+.env
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
