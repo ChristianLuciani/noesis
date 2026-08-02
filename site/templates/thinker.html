@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<article class="thinker-page">
+    <header class="thinker-header">
+        <h1>{{ page.title }}</h1>
+        {% if page.extra.tagline %}
+        <p class="tagline">{{ page.extra.tagline }}</p>
+        {% endif %}
+        <div class="thinker-meta">
+            {% if page.taxonomies.family %}
+            <div class="families">
+                {% for family in page.taxonomies.family %}
+                <a href="{{ get_taxonomy_url(kind='family', name=family) }}" class="family-tag">{{ family }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <span class="tradition">{{ page.extra.tradition }}</span>
+        </div>
+    </header>
+
+    <section class="thinker-profile">
+        <h2>Cognitive Profile</h2>
+        
+        <h3>Characteristic Questions</h3>
+        <ul>
+        {% for q in page.extra.characteristic_questions %}
+            <li>{{ q }}</li>
+        {% endfor %}
+        </ul>
+
+        {% if page.extra.heuristics %}
+        <h3>Heuristics</h3>
+        <ul>
+        {% for h in page.extra.heuristics %}
+            <li>{{ h }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        <h3>Self-Acknowledged Biases</h3>
+        <ul>
+        {% for b in page.extra.biases %}
+            <li>{{ b }}</li>
+        {% endfor %}
+        </ul>
+
+        {% if page.extra.epistemic_vices %}
+        <h3>Epistemic Vices</h3>
+        <ul>
+        {% for v in page.extra.epistemic_vices %}
+            <li>{{ v }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if page.extra.stops_when %}
+        <h3>Stops When</h3>
+        <p>{{ page.extra.stops_when }}</p>
+        {% endif %}
+
+        {% if page.extra.ignores %}
+        <h3>Deliberately Ignores</h3>
+        <ul>
+        {% for i in page.extra.ignores %}
+            <li>{{ i }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </section>
+
+    <section class="thinker-layers">
+        <h2>Agent Layers</h2>
+        <dl>
+            <dt>Skills</dt>
+            <dd>{{ page.extra.skills | join(sep=", ") | default(value="none (pure reasoning)") }}</dd>
+            <dt>Memory</dt>
+            <dd>{{ page.extra.memory_type | default(value="ephemeral") }} · {{ page.extra.memory_retention | default(value="session") }}</dd>
+            <dt>Context</dt>
+            <dd>{{ page.extra.context_strategy | default(value="full_context") }}</dd>
+            <dt>Runtime</dt>
+            <dd>{{ page.extra.runtime_execution | default(value="chain_of_thought") }}</dd>
+        </dl>
+    </section>
+
+    {% if page.extra.related %}
+    <section class="thinker-related">
+        <h2>Related Thinkers</h2>
+        {% for rel in page.extra.related %}
+        <div class="related-item">
+            <span class="rel-type">{{ rel.relationship }}</span>
+            <a href="/thinkers/{{ rel.thinker }}/">{{ rel.thinker }}</a>
+            {% if rel.note %}<span class="rel-note">— {{ rel.note }}</span>{% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="thinker-example">
+        {{ page.content | safe }}
+    </section>
+</article>
+{% endblock %}

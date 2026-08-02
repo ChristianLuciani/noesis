@@ -1,0 +1,169 @@
+:root {
+    --bg: #fafaf8;
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --accent: #2d5a7b;
+    --border: #e0e0dc;
+    --card-bg: #f5f5f2;
+    --tag-bg: #e8e8e4;
+    --max-width: 42rem;
+    --line-height: 1.7;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #1a1a18;
+        --text: #e8e8e4;
+        --text-secondary: #999;
+        --accent: #7eb8da;
+        --border: #333330;
+        --card-bg: #222220;
+        --tag-bg: #2a2a28;
+    }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: var(--line-height);
+    color: var(--text);
+    background: var(--bg);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, nav, footer {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--text-secondary); }
+
+p { margin-bottom: 1rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Navigation */
+header nav {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text);
+    text-decoration: none;
+}
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.nav-links { margin-left: auto; display: flex; gap: 1rem; }
+
+/* Hero */
+.hero { margin: 3rem 0; text-align: center; }
+.hero h1 { font-size: 3.5rem; }
+.tagline { font-size: 1.1rem; color: var(--text-secondary); }
+.thesis { max-width: 36rem; margin: 1rem auto; font-style: italic; color: var(--text-secondary); }
+
+/* Cards */
+.family-grid, .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 0.75rem;
+}
+.family-card, .nav-card, .thinker-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    color: var(--text);
+    display: block;
+}
+.family-card:hover, .nav-card:hover, .thinker-card:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+}
+.count { color: var(--text-secondary); font-size: 0.85rem; }
+
+/* Thinker page */
+.thinker-header { margin-bottom: 2rem; }
+.family-tag {
+    background: var(--tag-bg);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+}
+.tradition {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.thinker-page ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+.thinker-page li { margin-bottom: 0.35rem; }
+.thinker-page dl { margin-bottom: 1rem; }
+.thinker-page dt {
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 0.75rem;
+    color: var(--text-secondary);
+}
+.thinker-page dd { margin-left: 1rem; }
+
+.related-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.rel-type {
+    font-size: 0.8rem;
+    font-family: sans-serif;
+    background: var(--tag-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+}
+.rel-note { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Footer */
+footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Thinkers list */
+.thinkers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 0.75rem;
+}
+.thinker-card .slug { color: var(--text-secondary); font-size: 0.85rem; }
+
+/* Family page */
+.family-description { font-style: italic; color: var(--text-secondary); margin-bottom: 2rem; }
+
+/* List pages */
+.page-list { list-style: none; }
+.page-list li { margin-bottom: 0.5rem; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    body { padding: 1rem; font-size: 16px; }
+    .hero h1 { font-size: 2.5rem; }
+    header nav { flex-wrap: wrap; }
+}

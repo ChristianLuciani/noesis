@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Thinkers — {{ config.title }}{% endblock %}
+
+{% block content %}
+<h1>All Thinkers</h1>
+<div class="thinkers-grid">
+{% set section = get_section(path="thinkers/_index.md") %}
+{% for page in section.pages %}
+<a href="{{ page.permalink }}" class="thinker-card">
+    <h3>{{ page.title }}</h3>
+    {% if page.extra.tagline %}
+    <p>{{ page.extra.tagline }}</p>
+    {% endif %}
+    <span class="slug">{{ page.slug }}</span>
+</a>
+{% endfor %}
+</div>
+{% endblock %}

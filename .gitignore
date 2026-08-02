@@ -1,0 +1,19 @@
+# Zola build output
+site/public/
+
+# Python
+.venv/
+__pycache__/
+
+# Environment
+.env
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
