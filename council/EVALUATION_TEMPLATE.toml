@@ -1,0 +1,60 @@
+# Council Evaluation Template
+
+This TOML file defines the structured output format for council evaluations.
+Each council member fills one of these.
+
+```toml
+[meta]
+evaluator = ""         # thinker slug of the evaluator
+candidate = ""         # thinker slug of the candidate
+timestamp = ""         # ISO 8601
+
+[evaluation]
+recommendation = ""    # ACCEPT | REVISE | REJECT
+confidence = 0.0       # 0.0 to 1.0
+
+[reasoning]
+strengths = []         # What this thinker contributes (from evaluator's perspective)
+weaknesses = []        # Concerns, gaps, issues (from evaluator's perspective)
+relationship_to_existing = ""  # How relates to evaluator and others in taxonomy
+suggestions = ""       # Specific changes that would improve the candidate
+
+[self_assessment]
+bias_awareness = ""    # How evaluator's own biases may have colored this evaluation
+what_would_change_my_mind = ""  # What evidence or change would flip the recommendation
+second_look = ""       # Re-reading: too harsh or too generous?
+```
+
+---
+
+## Example: Critical Thinker evaluating "Optimistic Thinker"
+
+```toml
+[meta]
+evaluator = "critical"
+candidate = "optimistic"
+timestamp = "2026-08-01"
+
+[evaluation]
+recommendation = "REVISE"
+confidence = 0.75
+
+[reasoning]
+strengths = [
+    "Fills a genuine gap — no existing thinker systematically applies positive psychology frameworks",
+    "SOURCES.md has strong grounding in Seligman and Fredrickson, both well-cited",
+    "Distinguishable from divergent thinker: optimistic is about valence, not quantity of alternatives"
+]
+weaknesses = [
+    "EXAMPLES.md only shows cases where optimism leads to better outcomes — needs a case where optimism fails",
+    "self_acknowledged_biases is weak: 'may be too positive' is circular. Should acknowledge survivorship bias, planning fallacy",
+    "Thin line between 'optimistic thinking' and 'wishful thinking' — thinker.toml doesn't address this"
+]
+relationship_to_existing = "Complements critical (my perspective) — I question, they find possibility. But must be honest about when optimism is inappropriate."
+suggestions = "Add a negative case to EXAMPLES.md. Strengthen self_acknowledged_biases. Address the optimism/wishful-thinking boundary explicitly."
+
+[self_assessment]
+bias_awareness = "As a critical thinker, I'm biased toward finding flaws. I may be being too harsh on a thinker whose entire mode is about finding possibilities rather than problems. My 'comfort zone' is exactly what this thinker challenges."
+what_would_change_my_mind = "If EXAMPLES.md included a case where optimism led to a worse decision than a more cautious approach, and the thinker acknowledged this as a legitimate limitation."
+second_look = "On re-reading: my concerns are valid but I may be demanding a level of self-critique from this thinker that is more natural to MY mode than to theirs. Optimism's value is precisely in NOT over-analyzing. I'm adjusting my confidence from 0.8 to 0.75."
+```
