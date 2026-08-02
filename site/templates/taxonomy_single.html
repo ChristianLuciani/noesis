@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name }} — {{ config.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ term.name }}</h1>
+<div class="thinkers-grid">
+{% for page in term.pages %}
+<a href="{{ page.permalink }}" class="thinker-card">
+    <h3>{{ page.title }}</h3>
+    {% if page.extra.tagline %}
+    <p>{{ page.extra.tagline }}</p>
+    {% endif %}
+</a>
+{% endfor %}
+</div>
+{% endblock %}

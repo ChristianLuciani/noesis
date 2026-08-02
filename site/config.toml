@@ -1,0 +1,26 @@
+# The URL the site will be built for
+base_url = "https://christianluciani.github.io/noesis"
+
+# The site title and description
+title = "Noesis"
+description = "νοησις — Taxonomy of Thinking Perspectives. A catalog of thinking-mode agents as cognitive blueprints."
+
+# Language and translation
+default_language = "en"
+
+# Whether to generate a RSS feed
+generate_feeds = true
+
+# Taxonomies
+taxonomies = [
+    { name = "family", feed = true },
+    { name = "processing_mode", feed = true },
+    { name = "reasoning_direction", feed = true },
+]
+
+# Compilation
+build_search_index = false
+
+[extra]
+repo_url = "https://github.com/ChristianLuciani/noesis"
+noetix_url = "https://github.com/ChristianLuciani/noetix"

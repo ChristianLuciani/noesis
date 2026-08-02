@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{% if page.extra.lang %}{{ page.extra.lang }}{% else %}en{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <link rel="stylesheet" href="{{ get_url(path='styles.css') }}">
+    <meta name="description" content="{{ config.description }}">
+    <meta name="color-scheme" content="light dark">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ get_url(path='/') }}" class="logo">νοησις</a>
+            <span class="subtitle">{{ config.title }}</span>
+            <div class="nav-links">
+                <a href="{{ get_url(path='/families') }}">Families</a>
+                <a href="{{ get_url(path='/thinkers') }}">Thinkers</a>
+                <a href="{{ config.extra.repo_url }}">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>
+            Noesis — νοησις. <a href="{{ config.extra.repo_url }}">GitHub</a> · 
+            <a href="{{ config.extra.noetix_url }}">Noetix (runtime)</a>
+        </p>
+    </footer>
+</body>
+</html>

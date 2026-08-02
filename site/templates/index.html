@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.title }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>νοησις</h1>
+    <p class="tagline">{{ config.description }}</p>
+    <p class="thesis">
+        Humans have <strong>limitations of thought</strong>, not of intelligence. 
+        Our personality, education, and culture bind us to cognitive biases that prevent us 
+        from accessing thinking schemas we were never trained in.
+    </p>
+    <p class="thesis">
+        Noesis exists to free us from those limitations: 
+        <em>dismantle limiting paradigms and let expansive paradigms flourish.</em>
+    </p>
+</section>
+
+<section class="families-overview">
+    <h2>Families</h2>
+    <div class="family-grid">
+        {% set families = get_taxonomy(kind="family") %}
+        {% for term in families.items %}
+        <a href="{{ term.permalink }}" class="family-card">
+            <h3>{{ term.name }}</h3>
+            <span class="count">{{ term.pages | length }} thinkers</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="quick-nav">
+    <h2>Explore</h2>
+    <div class="nav-grid">
+        <a href="{{ get_url(path='/thinkers') }}" class="nav-card">All Thinkers</a>
+        <a href="{{ get_url(path='/families') }}" class="nav-card">By Family</a>
+        <a href="{{ config.extra.repo_url }}" class="nav-card">Contribute</a>
+        <a href="{{ config.extra.noetix_url }}" class="nav-card">Noetix Runtime →</a>
+    </div>
+</section>
+{% endblock %}
